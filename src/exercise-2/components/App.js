@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import '../styles/App.css';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
+import {BrowserRouter, Route, Link,Switch, Redirect} from 'react-router-dom';
 import Home from "./Home";
 import MyProfile from "./MyProfile";
 import AboutUs from "./AboutUs";
+import Products from "./Products";
+import ProDetails from './ProDetails';
 
 class App extends Component {
   render() {
@@ -17,6 +19,9 @@ class App extends Component {
                           <li className="nav-item active">
                             <Link to="/" className="nav-link">Home</Link>
                           </li>
+                          <li className="nav-item active">
+                            <Link to="/products" className="nav-link">Products</Link>
+                          </li>
                           <li className="nav-item">
                             <Link to="/my-profile" className="nav-link">My Profile</Link>
                           </li>
@@ -27,11 +32,15 @@ class App extends Component {
                       </div>
                   </nav>
               </div>
-            <switch>
+            <Switch>
+              <Route path="/products" component={Products}/>
+              <Route path="/products/:id" component={ProDetails}/>
               <Route exact path="/my-profile" component={MyProfile}/>
               <Route exact path="/about-us" component={AboutUs}/>
               <Route exact path="/" component={Home}/>
-            </switch>
+              <Redirect from={"/goods"} to={"/products"} />
+              <Redirect from={"/"} to={"/"} />
+            </Switch>
         </BrowserRouter>
       </div>
     );

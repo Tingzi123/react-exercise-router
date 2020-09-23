@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router} from 'react-router-dom';
-import {Route} from "react-router";
+import {BrowserRouter as Router,Route,Redirect} from 'react-router-dom';
 import Home from "./Home";
 import About from "./About";
 import User from "./User";
@@ -11,10 +10,10 @@ class App extends Component {
     return (
       <div className="app">
         <Router>
-            <Route component={NotMatch} />
-            <Route path='/' component={Home} />
-            <Route path='/:user' component={User} />
-            <Route path='/about' component={About} />
+            <Route exact path='/' exact component={Home} />
+            <Route path='/:user(\d+)'  exact component={User} />
+            <Route path='/about/' exact component={About} />
+            <Route  component={NotMatch} />
         </Router>
       </div>
     );
